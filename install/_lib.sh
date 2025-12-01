@@ -61,6 +61,7 @@ function ensure_app_env {
 }
 
 mkdir -p ../logs
+mkdir -p ../media
 
 # Increase the default 10 second SIGTERM timeout
 # to ensure celery queues are properly drained
