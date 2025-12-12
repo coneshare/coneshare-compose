@@ -29,3 +29,6 @@ runtime/gunicorn.conf.py
 
 # OSX minutia
 .DS_Store
+
+# Aider
+.aider*
