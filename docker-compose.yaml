@@ -27,7 +27,7 @@ x-coneshare-defaults: &coneshare_defaults
     # on the host system (or in the .env file)
     COMPOSE_PROFILES:
   volumes:
-    - "coneshare-data:/data"
+    - "../data:/data"
     - "../logs:/home/coneshare/logs"
     - "../media:/home/coneshare/app/media"
 
@@ -115,8 +115,6 @@ services:
       
 volumes:
   # These store application data that should persist across restarts.
-  coneshare-data:
-    external: true
   coneshare-postgres:
     external: true
   coneshare-redis:

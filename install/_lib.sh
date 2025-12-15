@@ -60,6 +60,7 @@ function ensure_app_env {
   fi
 }
 
+mkdir -p ../data
 mkdir -p ../logs
 mkdir -p ../media
 
