@@ -31,8 +31,6 @@ The key steps orchestrated by the installer include:
 
 The installation process was recently refactored to improve the user experience and secure the initial setup.
 
--   **Automatic `app.env` Creation**: A new `ensure_app_env` function was added to the installation script. It checks for the existence of `../app.env` and, if it is missing, creates it from
-the `coneshare-docker/app.env.example` template. This ensures that users do not have to perform this manual step.
+-   **Automatic `app.env` Creation**: A new `ensure_app_env` function was added to the installation script. It checks for the existence of `../app.env` and, if it is missing, creates it from the `coneshare-docker/app.env.example` template. This ensures that users do not have to perform this manual step.
 
--   **Automatic Secret Key Generation**: The `generate-secret-key.sh` script was updated to operate on the new `../app.env` file. During installation, it automatically replaces the default
-placeholder `SECRET_KEY` with a cryptographically secure, randomly generated value.
+-   **Automatic Secret Key Generation**: The `generate-secret-key.sh` script was updated to operate on the new `../app.env` file. During installation, it automatically replaces the default placeholder `SECRET_KEY` with a cryptographically secure, randomly generated value.
