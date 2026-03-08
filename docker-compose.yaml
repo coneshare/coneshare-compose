@@ -23,8 +23,8 @@ x-coneshare-defaults: &coneshare_defaults
     postgres:
       <<: *depends_on-healthy
   environment:
-    - PUID: ${PUID:-1000}
-    - PGID: ${PGID:-1000}
+    PUID: ${PUID:-1000}
+    PGID: ${PGID:-1000}
     # Leaving the value empty to just pass whatever is set
     # on the host system (or in the .env file)
     COMPOSE_PROFILES:
