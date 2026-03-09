@@ -57,7 +57,7 @@ services:
   celery:
     <<: *coneshare_defaults
     container_name: coneshare-celery
-    entrypoint: /home/coneshare/build/start-celery.sh
+    command: celery -A backend worker --loglevel=info
     ulimits:
       nofile:
         soft: 4096
