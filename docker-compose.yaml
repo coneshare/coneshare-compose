@@ -114,6 +114,17 @@ services:
         hard: 10032
     networks:
       - coneshare-net
+
+  clamav:
+    <<: *restart_policy
+    container_name: coneshare-calmav
+    image: clamav/clamav:stable-debian
+    profiles:
+      - malware
+    expose:
+      - "3310"
+    networks:
+      - coneshare-net
       
 volumes:
   # These store application data that should persist across restarts.

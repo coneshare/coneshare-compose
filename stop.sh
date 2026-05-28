@@ -2,14 +2,14 @@
 set -e
 
 dc_base="$(docker compose version &>/dev/null && echo 'docker compose' || echo 'docker-compose')"
-dc="$dc_base"
+dc=($dc_base)
 
 # Export host UID/GID
 export PUID=$(id -u)
 export PGID=$(id -g)
 
 if [[ -f "../.env" ]]; then
-    $dc --env-file .env --env-file ../.env stop
+    "${dc[@]}" --env-file .env --env-file ../.env "$@" stop
 else
-    $dc stop
+    "${dc[@]}" "$@" stop
 fi

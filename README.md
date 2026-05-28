@@ -66,6 +66,13 @@ After that, you can start the service by running the following command:
 ./start.sh
 ```
 
+To include optional services assigned to a Docker Compose profile, pass the
+profile to the start script. For example, to start Coneshare with ClamAV:
+
+```bash
+./start.sh --profile malware
+```
+
 To verify that the system components are running properly, execute the following command:
 
 ```bash
@@ -104,6 +111,12 @@ You can stop the running service containers with the following command:
 
 ```sh
 ./stop.sh
+```
+
+If you started optional profile services, pass the same profile when stopping:
+
+```sh
+./stop.sh --profile malware
 ```
 
 To stop and remove all service containers and networks, run the following:
