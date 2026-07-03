@@ -52,7 +52,21 @@ services:
   celery:
     <<: *coneshare_defaults
     container_name: coneshare-celery
-    command: celery -A backend worker --loglevel=info
+    command: celery -A backend worker --loglevel=info -Q celery --concurrency=${CELERY_WORKER_CONCURRENCY:-4}
+    ulimits:
+      nofile:
+        soft: 4096
+        hard: 4096
+    healthcheck:
+      <<: *healthcheck_defaults
+      test: ["CMD", "gosu", "coneshare", "python3", "-m", "celery", "-A", "backend", "inspect", "ping"]
+    networks:
+      - coneshare-net
+
+  video_worker:
+    <<: *coneshare_defaults
+    container_name: coneshare-video
+    command: celery -A backend worker -l INFO -Q video_processing --concurrency=${CELERY_VIDEO_WORKER_CONCURRENCY:-1}
     ulimits:
       nofile:
         soft: 4096
