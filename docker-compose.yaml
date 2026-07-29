@@ -77,16 +77,19 @@ services:
     networks:
       - coneshare-net
 
-  # beat:
-  #   <<: *coneshare_defaults
-  #   container_name: coneshare-beat
-  #   command: ["beat"]
-  #   ulimits:
-  #     nofile:
-  #       soft: 4096
-  #       hard: 4096
-  #   networks:
-  #     - coneshare-net
+  beat:
+    <<: *coneshare_defaults
+    container_name: coneshare-beat
+    command: celery -A backend beat --loglevel=info
+    ulimits:
+      nofile:
+        soft: 4096
+        hard: 4096
+    healthcheck:
+      <<: *healthcheck_defaults
+      test: ["CMD-SHELL", "pgrep -f 'celery.*beat' || exit 1"]
+    networks:
+      - coneshare-net
 
   postgres:
     <<: *restart_policy
