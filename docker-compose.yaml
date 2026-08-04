@@ -137,6 +137,24 @@ services:
       - "3310"
     networks:
       - coneshare-net
+
+  mcp_server:
+    <<: *restart_policy
+    container_name: coneshare-mcp
+    image: ${CONESHARE_MCP_IMAGE:-coneshare-mcp:latest}
+    env_file: ../app.env
+    platform: ${DOCKER_PLATFORM:-}
+    command: python3 -m coneshare_mcp.server
+    ports:
+      - "${MCP_BIND:-127.0.0.1:18999}:8001/tcp"
+    healthcheck:
+      <<: *healthcheck_defaults
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8001/mcp/sse"]
+    networks:
+      - coneshare-net
+    depends_on:
+      web:
+        <<: *depends_on-healthy
       
 volumes:
   # These store application data that should persist across restarts.
