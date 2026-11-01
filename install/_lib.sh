@@ -61,7 +61,6 @@ function ensure_app_env {
 }
 
 mkdir -p ../data
-mkdir -p ../logs
 mkdir -p ../media
 
 # Increase the default 10 second SIGTERM timeout
